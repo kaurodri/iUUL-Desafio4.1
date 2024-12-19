@@ -1,18 +1,63 @@
-|   UC   | Fluxo, Passos e Regras                                                                                                            | Caminho                                  | ID  | Microserviço      | Origem  |
-|--------|-----------------------------------------------------------------------------------------------------------------------------------|------------------------------------------|-----|-------------------|---------|
-|  UC01  | Fluxo principal (passos 2, 3)         - Cadastro de ciclista, validação de dados, registro e envio de email.                      | POST /ciclistas                          | #1  | Ciclista          |  FRONT  |
-|  UC02  | Fluxo principal (passo 1)             - Confirmação de email e ativação do cadastro.                                              | PUT /ciclistas/{id}/confirmar            | #2  | Ciclista          |  FRONT  |
-|  UC03  | Fluxo principal (passos 3, 4, 5)      - Aluguel da bicicleta, validação de tranca e pagamento.                                    | POST /alugueis/{id}/retirar              | #3  | Ciclista          |  FRONT  |
-|  UC04  | Fluxo principal (passos 2, 3, 4)      - Devolução da bicicleta, leitura da etiqueta RFID, cálculo do valor extra, envio de email. | POST /devolucoes/{id}/finalizar          | #4  | Ciclista          |  FRONT  |
-|  UC05  | Fluxo principal (passo 2)             - Autenticação de login (email e senha).                                                    | POST /ciclistas/login                    | #5  | Ciclista          |  FRONT  |
-|  UC06  | Fluxo principal (passo 3)             - Alteração dos dados do ciclista (email, nome, etc.).                                      | PUT /ciclistas/{id}/alterar              | #6  | Ciclista          |  FRONT  |
-|  UC07  | Fluxo principal (passo 3)             - Alteração de dados do cartão de crédito.                                                  | PUT /ciclistas/{id}/cartao               | #7  | Ciclista          |  FRONT  |
-|  UC08  | Fluxo principal (passo 3)             - Inclusão de bicicleta em totem, registro e alteração de status.                           | POST /equipamentos/bicicletas            | #8  | Equipamento       |  FRONT  |
-|  UC09  | Fluxo principal (passos 4, 5)         - Retirada de bicicleta para reparo, alteração de status.                                   | PUT /equipamentos/bicicletas/{id}/reparo | #9  | Equipamento       |  FRONT  |
-|  UC11  | Fluxo principal (passos 3, 4)         - Inclusão de tranca em totem, validação e alteração de status.                             | POST /equipamentos/trancas               | #10 | Equipamento       |  FRONT  |
-|  UC12  | Fluxo principal (passos 4, 5)         - Retirada de tranca para reparo, alteração de status.                                      | PUT /equipamentos/trancas/{id}/reparo    | #11 | Equipamento       |  FRONT  |
-|  UC10  | Fluxo principal (passos 3, 4)         - Manutenção do cadastro de bicicletas, incluir/editar/excluir.                             | PUT /equipamentos/bicicletas/{id}        | #12 | Equipamento       |  FRONT  |
-|  UC13  | Fluxo principal (passos 3, 4)         - Manutenção do cadastro de trancas, incluir/editar/excluir.                                | PUT /equipamentos/trancas/{id}           | #13 | Equipamento       |  FRONT  |
-|  UC14  | Fluxo principal (passos 3, 4)         - Manutenção do cadastro de totens, incluir/excluir.                                        | PUT /equipamentos/totens/{id}            | #14 | Equipamento       |  FRONT  |
-|  UC15  | Fluxo principal (passos 3, 4)         - Manutenção do cadastro de funcionários, incluir/editar/excluir.                           | PUT /funcionarios/{id}                   | #15 | Equipamento       |  FRONT  |
-|  UC16  | Fluxo principal (passo 3)             - Cobrança de taxas extras não realizadas, processamento e envio de email.                  | POST /servicosexternos/cobrancas         | #16 | Serviços Externos |  FRONT  |
+|   UC   | Fluxo, Passos e Regras        | Caminho                                       | ID  | Microserviço      | Origem  |
+|--------|-------------------------------|-----------------------------------------------|-----|-------------------|---------|
+|  UC01  | Fluxo principal (passo 6)     | POST /ciclista                                | #1  | Aluguel           |         |
+|  UC01  | Fluxo principal (passo 3)     | GET /ciclista/existeEmail/{email}             | #2  | Aluguel           |         |
+|  UC01  | Fluxo principal (passo 9)     | POST /enviarEmail                             | #3  | Externo           |         |
+|  UC01  | Fluxo principal (passo 7)     | POST /validaCartaoDeCredito                   | #4  | Externo           |         |
+|        |                               |                                               |     |                   |         |
+|  UC02  | Fluxo principal (passo 2)     | POST /ciclista/{idCiclista}/ativar            | #5  | Aluguel           |         |
+|        |                               |                                               |     |                   |         |
+|  UC03  | Fluxo principal (passo 1)     | GET /ciclista/{idCiclista}/permiteAluguel     | #6  | Aluguel           |         |
+|  UC03  | Fluxo principal (passo 5)     | GET /ciclista/{idCiclista}/bicicletaAlugada   | #7  | Aluguel           |         |
+|  UC03  | Fluxo principal (passo 8)     | POST /aluguel                                 | #8  | Aluguel           |         |
+|  UC03  | Fluxo principal (passo 5)     | GET /tranca/{idTranca}/bicicleta              | #9  | Equipamento       |         |
+|  UC03  | Fluxo principal (passo 10)    | POST /tranca/{idTranca}/destrancar            | #10 | Equipamento       |         |
+|  UC03  | Fluxo principal (passo 6)     | POST /cobranca                                | #11 | Externo           |         |
+|        |                               |                                               |     |                   |         |
+|  UC04  | Fluxo principal (passo 4)     | POST /devolucao                               | #12 | Aluguel           |         |
+|        |                               |                                               |     |                   |         |
+|  UC06  | Fluxo principal (passo )      | GET /ciclista/{idCiclista}                    | #13 | Aluguel           |         |
+|  UC06  | Fluxo principal (passo 2)     | PUT /ciclista/{idCiclista}                    | #14 | Aluguel           |         |
+|        |                               |                                               |     |                   |         |
+|  UC07  | Fluxo principal (passo )      | GET /cartaoDeCredito/{idCiclista}             | #15 | Aluguel           |         |
+|  UC07  | Fluxo principal (passo 2)     | PUT /cartaoDeCredito/{idCiclista}             | #16 | Aluguel           |         |
+|        |                               |                                               |     |                   |         |
+|  UC08  | Fluxo principal (passo 3)     | POST /bicicleta/integrarNaRede                | #17 | Equipamento       |         |
+|  UC08  | Fluxo principal (passo )      | POST /tranca/{idTranca}/trancar               | #18 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC09  | Fluxo principal (passo 7)     | POST /bicicleta/retirarDaRede                 | #19 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC10  | Fluxo principal (passo 1)     | GET /bicicleta                                | #20 | Equipamento       |         |
+|  UC10  | Fluxo principal (passo 3)     | POST /bicicleta                               | #21 | Equipamento       |         |
+|  UC10  | Fluxo principal (passos 3, 7) | GET /bicicleta/{idBicicleta}                  | #22 | Equipamento       |         |
+|  UC10  | Fluxo principal (passo )      | PUT /bicicleta/{idBicicleta}                  | #23 | Equipamento       |         |
+|  UC10  | Fluxo principal (passo )      | DELETE /bicicleta/{idBicicleta}               | #24 | Equipamento       |         |
+|  UC10  | Fluxo principal (passo )      | POST /bicicleta/{idBicicleta}/status/{acao}   | #25 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC11  | Fluxo principal (passo 3)     | POST /tranca/integrarNaRede                   | #26 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC12  | Fluxo principal (passo 7)     | POST /tranca/retirarDaRede                    | #27 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC13  | Fluxo principal (passo 1)     | GET /tranca                                   | #28 | Equipamento       |         |
+|  UC13  | Fluxo principal (passos 3, 7) | POST /tranca                                  | #29 | Equipamento       |         |
+|  UC13  | Fluxo principal (passo )      | GET /tranca/{idTranca}                        | #30 | Equipamento       |         |
+|  UC13  | Fluxo principal (passo )      | PUT /tranca/{idTranca}                        | #31 | Equipamento       |         |
+|  UC13  | Fluxo principal (passo )      | DELETE /tranca/{idTranca}                     | #32 | Equipamento       |         |
+|  UC13  | Fluxo principal (passo )      | POST /tranca/{idTranca}/status/{acao}         | #33 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC14  | Fluxo principal (passo 1)     | GET /totem                                    | #34 | Equipamento       |         |
+|  UC14  | Fluxo principal (passos 3, 7) | POST /totem                                   | #35 | Equipamento       |         |
+|  UC14  | Fluxo principal (passo )      | PUT /totem/{idTotem}                          | #36 | Equipamento       |         |
+|  UC14  | Fluxo principal (passo )      | DELETE /totem/{idTotem}                       | #37 | Equipamento       |         |
+|  UC14  | Fluxo principal (passo )      | GET /totem/{idTotem}/trancas                  | #38 | Equipamento       |         |
+|  UC14  | Fluxo principal (passo )      | GET /totem/{idTotem}/bicicletas               | #39 | Equipamento       |         |
+|        |                               |                                               |     |                   |         |
+|  UC15  | Fluxo principal (passo 1)     | GET /funcionario                              | #40 | Aluguel           |         |
+|  UC15  | Fluxo principal (passo 3, 7)  | POST /funcionario                             | #41 | Aluguel           |         |
+|  UC15  | Fluxo principal (passo )      | GET /funcionario/{idFuncionario}              | #42 | Aluguel           |         |
+|  UC15  | Fluxo principal (passo )      | PUT /funcionario/{idFuncionario}              | #43 | Aluguel           |         |
+|  UC15  | Fluxo principal (passo )      | DELETE /funcionario/{idFuncionario}           | #44 | Aluguel           |         |
+|        |                               |                                               |     |                   |         |
+|  UC16  | Fluxo principal (passo 2)     | POST /processaCobrancasEmFila                 | #45 | Externo           |         |
+|  UC16  | Fluxo principal (passo )      | POST /filaCobranca                            | #46 | Externo           |         |
+|  UC16  | Fluxo principal (passo )      | GET /cobranca/{idCobranca}                    | #47 | Externo           |         |
