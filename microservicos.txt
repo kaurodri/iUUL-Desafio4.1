@@ -1,0 +1,57 @@
+|------------------------------------------------------------------------------------------------------------------------|
+| Microserviço → ALUGUEL                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------|
+| POST /ciclista                                 - Cadastrar um ciclista                                                 |
+| GET /ciclista/{idCiclista}                     - Recupera dados de um ciclista                                         |
+| PUT /ciclista/{idCiclista}                     - Alterar dados de um ciclista                                          |
+| POST /ciclista/{idCiclista}/ativar             - Ativar cadastro do ciclista                                           |
+| GET /ciclista/{idCiclista}/permiteAluguel      - Verifica se o ciclista pode alugar uma bicicleta                      |
+| GET /ciclista/{idCiclista}/bicicletaAlugada    - Obtém bicicleta alugada por um ciclista                               |
+| GET /ciclista/existeEmail/{email}              - Verifica se o e-mail já foi utilizado por algum ciclista              |
+| GET /funcionario                               - recupera funcionários cadastrados                                     |
+| POST /funcionario                              - Cadastrar funcionário                                                 |
+| GET /funcionario/{idFuncionario}               - Recupera funcionário                                                  |
+| PUT /funcionario/{idFuncionario}               - Editar funcionário                                                    |
+| DELETE /funcionario/{idFuncionario}            - Remover funcionário                                                   |
+| GET /cartaoDeCredito/{idCiclista}              - Recupera dados de cartão de crédito de um ciclista                    |
+| PUT /cartaoDeCredito/{idCiclista}              - Alterar dados de cartão de crédito de um ciclista                     |
+| POST /aluguel                                  - Realizar aluguel                                                      |
+| POST /devolucao                                - Realizar devolução                                                    |
+|------------------------------------------------------------------------------------------------------------------------|
+| Microserviço → EQUIPAMENTO                                                                                             |
+|------------------------------------------------------------------------------------------------------------------------|
+| GET /bicicleta                                 - Recupera bicicletas cadastradas                                       |
+| POST /bicicleta                                - Cadastrar bicicleta                                                   |
+| POST /bicicleta/integrarNaRede                 - Colocar uma bicicleta nova ou retornando de reparo na rede de totens  |
+| POST /bicicleta/retirarDaRede                  - Retirar bicicleta para reparo ou aposentadoria                        |
+| GET /bicicleta/{idBicicleta}                   - Obter bicicleta                                                       |
+| PUT /bicicleta/{idBicicleta}                   - Editar bicicleta                                                      |
+| DELETE /bicicleta/{idBicicleta}                - Remover bicicleta                                                     |
+| POST /bicicleta/{idBicicleta}/status/{acao}    - Alterar status da bicicleta                                           |
+| GET /totem                                     - Recupera totens cadastrados                                           |
+| POST /totem                                    - Incluir totem                                                         |
+| POST /tranca/integrarNaRede                    - Colocar uma tranca nova ou retornando de reparo na rede de totens     |
+| POST /tranca/retirarDaRede                     - Retirar uma tranca para aposentadoria ou reparo                       |
+| PUT /totem/{idTotem}                           - Editar totem                                                          |
+| DELETE /totem/{idTotem}                        - Remover totem                                                         |
+| GET /totem/{idTotem}/trancas                   - Listar trancas de um totem                                            |
+| GET /totem/{idTotem}/bicicletas                - Listar bicicletas de um totem                                         |
+| GET /tranca                                    - Recupera trancas cadastradas                                          |
+| POST /tranca                                   - Cadastrar tranca                                                      |
+| GET /tranca/{idTranca}                         - Obter tranca                                                          |
+| PUT /tranca/{idTranca}                         - Editar tranca                                                         |
+| DELETE /tranca/{idTranca}                      - Remover tranca                                                        |
+| GET /tranca/{idTranca}/bicicleta               - Obter bicicleta na tranca                                             |
+| POST /tranca/{idTranca}/trancar                - Realiza o trancamento da tranca alterando o status.                   |
+| POST /tranca/{idTranca}/destrancar             - Realiza o destrancamento da tranca alterando o status.                |
+| POST /tranca/{idTranca}/status/{acao}          - Alterar status da tranca                                              |
+|------------------------------------------------------------------------------------------------------------------------|
+| Microserviço → EXTERNO                                                                                                 |
+|------------------------------------------------------------------------------------------------------------------------|
+| POST /enviarEmail                               - Notificar via email                                                  |
+| POST /cobranca                                  - Realizar cobrança                                                    |
+| POST /processaCobrancasEmFila                   - Processa todas as cobranças atrasadas colocadas em fila previamente. |
+| POST /filaCobranca                              - Inclui cobrança na fila de cobrança.                                 |
+| GET /cobranca/{idCobranca}                      - Obter cobrança                                                       |
+| POST /validaCartaoDeCredito                     - Valida um cartão de crédito                                          |
+|------------------------------------------------------------------------------------------------------------------------|
